@@ -8,6 +8,8 @@ import { DatePicker } from "@/components/DatePicker/DatePicker";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { states, departments } from "@/data/data";
 import Modal from "hrnet-modal-david";
+import { useEmployees } from "@/provider/Provider";
+import { Employee } from "@/provider/Provider";
 
 const formSchema = z.object({
     firstName: z.string().nonempty("First Name is required"),
@@ -22,6 +24,9 @@ const formSchema = z.object({
 });
 
 const EmployeeForm: React.FC = () => {
+    const { addEmployee } = useEmployees();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -37,14 +42,12 @@ const EmployeeForm: React.FC = () => {
         },
     });
 
-    const onSubmit = (values: unknown) => {
-        const employees = JSON.parse(localStorage.getItem("employees") || "[]");
-        employees.push(values);
-        localStorage.setItem("employees", JSON.stringify(employees));
+    const onSubmit = (values: Employee) => {
+        addEmployee(values)
         setIsModalOpen(true);
     };
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
+
 
     return (
         <>

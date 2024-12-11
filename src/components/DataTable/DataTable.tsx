@@ -4,16 +4,17 @@ import {
     getCoreRowModel,
     useReactTable,
 } from "@tanstack/react-table";
+import { useEmployees } from "@/provider/Provider";
 
 interface DataTableProps<TData> {
     columns: ColumnDef<TData, unknown>[];
-    data: TData[];
 }
 
-export function DataTable<TData>({ columns, data }: DataTableProps<TData>) {
+export function DataTable<TData>({ columns }: DataTableProps<TData>) {
+    const { employees } = useEmployees();
     const table = useReactTable({
         columns,
-        data,
+        data: employees as TData[],
         getCoreRowModel: getCoreRowModel(),
     });
 
