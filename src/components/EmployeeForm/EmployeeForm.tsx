@@ -217,7 +217,7 @@ const EmployeeForm: React.FC = () => {
                     />
 
                     {/* Save Button */}
-                    <Button type="submit" className="bg-blue-500 text-white hover:bg-blue-600 flex justify-self-center">
+                    <Button type="submit" className="bg-blue-700 text-white hover:bg-blue-800 flex justify-self-center">
                         Save Employee
                     </Button>
                 </form>
