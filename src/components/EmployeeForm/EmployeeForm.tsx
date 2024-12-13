@@ -12,15 +12,15 @@ import { useEmployees } from "@/provider/Provider";
 import { Employee } from "@/provider/Provider";
 
 const formSchema = z.object({
-    firstName: z.string().nonempty("First Name is required"),
-    lastName: z.string().nonempty("Last Name is required"),
+    firstName: z.string().min(1, "First Name is required"),
+    lastName: z.string().min(1, "Last Name is required"),
     dateOfBirth: z.date(),
     startDate: z.date(),
-    street: z.string().nonempty("Street is required"),
-    city: z.string().nonempty("City is required"),
-    state: z.string().nonempty("State is required"),
+    street: z.string().min(1, "Street is required"),
+    city: z.string().min(1, "City is required"),
+    state: z.string().min(1, "State is required"),
     zipCode: z.string().min(5, "Zip Code must be at least 5 characters"),
-    department: z.string().nonempty("Department is required"),
+    department: z.string().min(1, "Department is required"),
 });
 
 const EmployeeForm: React.FC = () => {
@@ -226,10 +226,18 @@ const EmployeeForm: React.FC = () => {
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 text="Employee correctly created"
+                fadeDuration={300}
                 textStyle={{ fontSize: "18px", textAlign: "center" }}
                 closeOnOverlayClick={true}
                 closeOnEscape={true}
                 showCloseButton={true}
+                closeButtonClass="test"
+                closeButtonText="test"
+                closeButtonPosition="top-right"
+                className="test"
+                overlayClassName="test2"
+                border="3px solid #ccc"
+                boxShadow="10px 5px 5px red"
             />
         </>
     );
